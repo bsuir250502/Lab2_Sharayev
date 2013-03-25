@@ -33,17 +33,15 @@ students_t* read_names(int *n)
     students_t *stud;
     char arr[Max_num_of_stud][30];
     for (i = 0; i < Max_num_of_stud; i++) {
-		printf("Enter the name of the %d student", i+1);
+		printf("Enter the name of the %d student:   ", i+1);
         myfgets(arr[i], 30);
-        if (strcmp(arr[i],"end")) 
-        {
+        if (!(strcmp(arr[i],"end")) ) {
             break;
         }
     }
     *n = i;
     stud = (students_t *) malloc(*n * sizeof(students_t));
-    for (i = 0; i < *n; i++) 
-    {
+    for (i = 0; i < *n; i++) {
         strncpy(stud[i].full_name.name, arr[i],30);
     }
     return stud;
