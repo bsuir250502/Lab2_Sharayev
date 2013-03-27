@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <malloc.h>
+#include "mylib.h"
 #define Max_num_of_stud 20
 
 typedef struct {
@@ -15,17 +16,6 @@ typedef struct {
 		int result;
 	} results;
 }students_t; 
-
-char* myfgets(char *str, int num)
-{
-	if( !(fgets(str, num, stdin)) ){
-		return 0;
-	}
-	else {
-	str[strlen(str)-1]='\0';
-	}
-	return str;
-}
 
 students_t* read_names(int *n)
 {
