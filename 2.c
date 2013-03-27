@@ -6,15 +6,19 @@
 #define Max_num_of_stud 20
 
 typedef struct {
-	 struct full_name_t{
-		char name[10];
-		char surname[10];
-		char patronymic[10];
-	} full_name;
-	union results_t{
+	char name[10];
+	char surname[10];
+	char patronymic[10];
+}full_name_t;
+
+typedef union {
 		int exm_num;
 		int result;
-	} results;
+	} results_t;
+
+typedef struct {
+	full_name_t full_name;
+	results_t results;
 }students_t; 
 
 students_t* read_names(int *n)
