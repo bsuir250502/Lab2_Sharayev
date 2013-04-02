@@ -6,5 +6,6 @@
 #include <string.h>
 
 char* myfgets(char *, int);
+void prnt_manual(int ,char **);
 
 #endif
