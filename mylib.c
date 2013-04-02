@@ -10,3 +10,13 @@ char* myfgets(char *str, int num)
     }
     return str;
 }
+
+int prnt_manual(int argc,char **argv){
+    if(argc > 1 && !(strcmp(argv[1] ,"-h")) ) {
+        printf("____________________________\n"
+               " Manual\n"
+               "____________________________\n"
+               );
+    }
+    return 0;
+}
