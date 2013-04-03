@@ -8,6 +8,9 @@ the second.
   - Name
   - Surname
   - Pathronymic
-2)Provide results in format
-  - <Exam> <Mark> (1<=Mark<=10)
+2)Provide results(Marks) in format (1<=Mark<=10)
+  - <Exam_1> <Mark_1> 
+  - <Exam_2> <Mark_2>
+  - ....
+  - <Exam_i> <Mark_i>
 After this steps information about the students and its results will appear on the screen.
