@@ -36,7 +36,7 @@ int input_number_in_range(int from, int to)
     int first = 1;
     do {
         if(!first){
-            printf("Please enter number between %d and %d", from, to);
+            printf("Please enter number between %d and %d\n", from, to);
         }
         myfgets(input_buffer, 128);
         n = strtol(input_buffer, &endptr, 10);
