@@ -44,11 +44,23 @@ students_t* read_names(int *n)
 
 int main(int argc, char **argv)
 {
-    int i,n=Max_num_of_stud;
+    int i,n=Max_num_of_stud,sem_num;
     if(print_manual(argc,argv)) {
-        return 0;
-    }
-    read_names(&n);
+		return 0;
+	}
+	if(argc > 1 && argc < 3) {
+		if(!(strcmp(argv[2], "-f") {
+			sem_num = 1;
+		}
+		if(strcmp(argv[2], "-s") {
+			sem_numb = 2;
+		}
+	}
+	else {
+		printf("You need to set one of two sems(first(-f) or second(-s))");
+		return 0;
+	}
+	read_names(&n);
 
     
     return 0;
