@@ -102,7 +102,7 @@ int read_results(students_t * stud, int numb_of_stud, int sem_numb) {
 				stud[i].results.sem1_result[j]=input_number_in_range(1,10);
 			}
 			else {
-				stud[i].results.sem1_result[j]=input_number_in_range(1,10);
+				stud[i].results.sem2_result[j]=input_number_in_range(1,10);
 			}
 		}
 	}
