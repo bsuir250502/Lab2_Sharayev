@@ -22,6 +22,7 @@ int print_manual(int argc,char **argv){
 		}
 		printf("\n");
 		fclose(fp);
+		return 1;
     }
 
     return 0;
