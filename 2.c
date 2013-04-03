@@ -23,6 +23,19 @@ typedef struct {
 	results_t results;
 }students_t; 
 
+char* catalog_of_exams(int exam_numb) {
+	char catalog[][12]={"Math", "Programming", "English", "Physics", "AiLOVT"};
+	switch(exam_numb) {
+		case 1: break;
+		case 2: return catalog[1];
+		case 3: return catalog[2];
+		case 4: return catalog[3];
+		case 5: return catalog[4];
+		default: return 0;
+	}
+
+}
+
 students_t* read_full_names(int *n)
 {
     int i, j;
@@ -50,6 +63,10 @@ students_t* read_full_names(int *n)
     return stud;
 }
 
+int read_results(void) {
+	return 0;
+}
+
 int read_argument(int argc, char **argv) {
 	int sem_numb;
 	if(argc > 1 && argc < 3) {
@@ -70,13 +87,14 @@ int read_argument(int argc, char **argv) {
 int main(int argc, char **argv)
 {
     int i,n=Max_num_of_stud,sem_numb;
+	students_t *stud;
     if(print_manual(argc,argv)) {
 		return 0;
 	}
 	if(!(sem_numb=read_argument(argc, argv)) ) {
 		return 0;	
 	}
-    read_full_names(&n);
+    stud = read_full_names(&n);
 	
     return 0;
 }
