@@ -45,7 +45,9 @@ students_t* read_names(int *n)
 int main(int argc, char **argv)
 {
     int i,n=Max_num_of_stud;
-    prnt_manual(argc,argv);
+    if(print_manual(argc,argv)) {
+        return 0;
+    }
     read_names(&n);
 
     
