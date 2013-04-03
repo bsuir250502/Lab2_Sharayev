@@ -12,10 +12,8 @@ typedef struct {
 }full_name_t;
 
 typedef union {
-		int sem1_exam_num[3];
-		int sem1_result[3];
-		int sem2_exam_num[4];
-		int sem2_result[4];
+	int sem1_result[3];
+	int sem2_result[4];
 	} results_t;
 
 typedef struct {
@@ -23,57 +21,45 @@ typedef struct {
 	results_t results;
 }students_t; 
 
-char* catalog_of_exams(int exam_numb) {
-	char catalog[][12]={"Math", "Programming", "English", "Physics", "AiLOVT"};
-	switch(exam_numb) {
-		case 1: break;
-		case 2: return catalog[1];
-		case 3: return catalog[2];
-		case 4: return catalog[3];
-		case 5: return catalog[4];
-		default: return 0;
-	}
+int read_results(students_t *, int, int);
+char* catalog_of_exams(int);
 
-}
-
-students_t* read_full_names(int *n)
+students_t* read_full_names(int *num_of_stud)
 {
-    int i, j;
-    students_t *stud;
-    char arr[Max_num_of_stud][3][30];
-    for (i = 0; i < Max_num_of_stud; i++) {
+	int i, j;
+	students_t *stud;
+	char arr[Max_num_of_stud][3][30];
+	for (i = 0; i < Max_num_of_stud; i++) {
 		printf("Enter the name of the %d student:\n   ", i+1);
-        myfgets(arr[0][i], 30);
+		myfgets(arr[0][i], 30);
 		if (!(strcmp(arr[0][i],"End.")) ) {
-            break;
-        }
+			break;
+		}
 		printf("The surname:\n   ");
 		myfgets(arr[1][i], 30);
 		printf("Patronymic:\n   ", i+1);
 		myfgets(arr[2][i], 30);
 		
     }
-    *n = i;
-    stud = (students_t *) malloc(*n * sizeof(students_t));
-    for (i = 0; i < *n; i++) {
-        strncpy(stud[i].full_name.name, arr[0][i],30);
+    *num_of_stud = i;
+    stud = (students_t *) malloc(*num_of_stud * sizeof(students_t));
+    for (i = 0; i < *num_of_stud; i++) {
+		strncpy(stud[i].full_name.name, arr[0][i],30);
 		strncpy(stud[i].full_name.surname, arr[1][i],30);
 		strncpy(stud[i].full_name.patronymic, arr[2][i],30);
     }
     return stud;
 }
 
-int read_results(void) {
-	return 0;
-}
+
 
 int read_argument(int argc, char **argv) {
 	int sem_numb;
 	if(argc > 1 && argc < 3) {
-		if(!(strcmp(argv[2], "-f")) ) {
+		if(!(strcmp(argv[1], "-f")) ) {
 			sem_numb = 1;
 		}
-		if(!(strcmp(argv[2], "-s")) ) {
+		if(!(strcmp(argv[1], "-s")) ) {
 			sem_numb = 2;
 		}
 	}
@@ -86,7 +72,7 @@ int read_argument(int argc, char **argv) {
 
 int main(int argc, char **argv)
 {
-    int i,n=Max_num_of_stud,sem_numb;
+    int i,numb_of_stud=Max_num_of_stud,sem_numb;
 	students_t *stud;
     if(print_manual(argc,argv)) {
 		return 0;
@@ -94,8 +80,44 @@ int main(int argc, char **argv)
 	if(!(sem_numb=read_argument(argc, argv)) ) {
 		return 0;	
 	}
-    stud = read_full_names(&n);
-	
+    stud = read_full_names(&numb_of_stud);
+	read_results(stud,numb_of_stud,sem_numb);
     return 0;
 }
 
+int read_results(students_t * stud, int numb_of_stud, int sem_numb) {
+	int i, j, amount_of_exams, exam_numb_in_sem[][4]={{1, 2, 3}, {1, 2, 4, 5}};
+	if(sem_numb == 1) {
+		amount_of_exams=3;
+	}
+	else {
+		amount_of_exams=4;
+	}
+	printf("Specify results of students:\n");
+	for(i=0; i < numb_of_stud; i++) {
+		printf("%d) %s %s\n",i+1,stud[i].full_name.name, stud[i].full_name.surname);
+		for(j=0; j < amount_of_exams; j++) {
+			printf("  %s", catalog_of_exams(exam_numb_in_sem[sem_numb][j]));
+			if(sem_numb == 1) {
+				stud[i].results.sem1_result[j]=input_number_in_range(1,10);
+			}
+			else {
+				stud[i].results.sem1_result[j]=input_number_in_range(1,10);
+			}
+		}
+	}
+
+	return 0;
+}
+
+char* catalog_of_exams(int exam_numb) {
+	char exam[][12]={"Math", "Programming", "AiLOVT", "Physics", "English"};
+	switch(exam_numb) {
+		case 1: return exam[0];
+		case 2: return exam[1];
+		case 3: return exam[2];
+		case 4: return exam[3];
+		case 5: return exam[4];
+		default: return 0;
+	}
+}
