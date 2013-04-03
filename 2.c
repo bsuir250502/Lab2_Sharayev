@@ -23,6 +23,8 @@ typedef struct {
 
 int read_results(students_t *, int, int);
 char* catalog_of_exams(int);
+int print_information(students_t *, int, int);
+
 
 students_t* read_full_names(int *num_of_stud)
 {
@@ -32,7 +34,7 @@ students_t* read_full_names(int *num_of_stud)
 	for (i = 0; i < Max_num_of_stud; i++) {
 		printf("Enter the name of the %d student:\n   ", i+1);
 		myfgets(arr[0][i], 30);
-		if (!(strcmp(arr[0][i],"End.")) ) {
+		if (!(strcmp(arr[0][i],"end")) ) {
 			break;
 		}
 		printf("The surname:\n   ");
@@ -80,8 +82,10 @@ int main(int argc, char **argv)
 	if(!(sem_numb=read_argument(argc, argv)) ) {
 		return 0;	
 	}
+	sem_numb=1;
     stud = read_full_names(&numb_of_stud);
 	read_results(stud,numb_of_stud,sem_numb);
+	print_information(stud,numb_of_stud,sem_numb);
     return 0;
 }
 
@@ -97,7 +101,7 @@ int read_results(students_t * stud, int numb_of_stud, int sem_numb) {
 	for(i=0; i < numb_of_stud; i++) {
 		printf("%d) %s %s\n",i+1,stud[i].full_name.name, stud[i].full_name.surname);
 		for(j=0; j < amount_of_exams; j++) {
-			printf("  %s", catalog_of_exams(exam_numb_in_sem[sem_numb-1][j]));
+			printf("  %s  ", catalog_of_exams(exam_numb_in_sem[sem_numb-1][j]));
 			if(sem_numb == 1) {
 				stud[i].results.sem1_result[j]=input_number_in_range(1,10);
 			}
@@ -110,7 +114,32 @@ int read_results(students_t * stud, int numb_of_stud, int sem_numb) {
 	return 0;
 }
 
-char* catalog_of_exams(int exam_numb) {
+int print_information(students_t * stud, int numb_of_stud, int sem_numb) {
+	int i, j, amount_of_exams, exam_numb_in_sem[][4]={{1, 2, 3}, {1, 2, 4, 5}};
+	if(sem_numb == 1) {
+		amount_of_exams=3;
+	}
+	else {
+		amount_of_exams=4;
+	}
+	printf("Results of students:\n");
+	for(i=0; i < numb_of_stud; i++) {
+		printf("%d) %s %s\n",i+1,stud[i].full_name.name, stud[i].full_name.surname);
+		for(j=0; j < amount_of_exams; j++) {
+			printf("  %s  ", catalog_of_exams(exam_numb_in_sem[sem_numb-1][j]));
+			if(sem_numb == 1) {
+				printf("%d", stud[i].results.sem1_result[j]);
+			}
+			else {
+				printf("%d", stud[i].results.sem2_result[j]);
+			}
+		}
+	}
+
+	return 0;
+}
+
+char *catalog_of_exams(int exam_numb) {
 	char exam[][12]={"Math", "Programming", "AiLOVT", "Physics", "English"};
 	switch(exam_numb) {
 		case 1: return exam[0];
@@ -121,3 +150,5 @@ char* catalog_of_exams(int exam_numb) {
 		default: return 0;
 	}
 }
+
+
