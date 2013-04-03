@@ -50,7 +50,7 @@ students_t* read_full_names(int *n)
     return stud;
 }
 
-int read_arguments(int argc, char **argv) {
+int read_argument(int argc, char **argv) {
 	int sem_numb;
 	if(argc > 1 && argc < 3) {
 		if(!(strcmp(argv[2], "-f")) ) {
@@ -69,11 +69,11 @@ int read_arguments(int argc, char **argv) {
 
 int main(int argc, char **argv)
 {
-    int i,n=Max_num_of_stud,sem_num;
+    int i,n=Max_num_of_stud,sem_numb;
     if(print_manual(argc,argv)) {
 		return 0;
 	}
-	if(!(sem_numb=read_argument(argc, argv)) {
+	if(!(sem_numb=read_argument(argc, argv)) ) {
 		return 0;	
 	}
     read_full_names(&n);
