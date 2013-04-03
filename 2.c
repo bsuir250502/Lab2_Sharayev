@@ -121,6 +121,7 @@ int print_information(students_t * stud, int numb_of_stud, int sem_numb) {
 				printf("%d", stud[i].results.sem2_result[j]);
 			}
 		}
+		printf("\n");
 	}
 
 	return 0;
