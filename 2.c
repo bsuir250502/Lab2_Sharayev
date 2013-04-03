@@ -138,16 +138,12 @@ int print_information(students_t * stud, int numb_of_stud, int sem_numb) {
 	return 0;
 }
 
-char *catalog_of_exams(int exam_numb) {
-	char exam[][12]={"Math", "Programming", "AiLOVT", "Physics", "English"};
-	switch(exam_numb) {
-		case 1: return exam[0];
-		case 2: return exam[1];
-		case 3: return exam[2];
-		case 4: return exam[3];
-		case 5: return exam[4];
-		default: return 0;
-	}
+char *catalog_of_exams(int exam_number) {
+    static char exam[][12]={"Math", "Programming", "AiLOVT", "Physics", "English"};
+    if (exam_number >= 1 && exam_number <= 5)
+        return exam[exam_number - 1];
+    else
+        return "";
 }
 
 
