@@ -12,8 +12,10 @@ typedef struct {
 }full_name_t;
 
 typedef union {
-		int exm_num;
-		int result;
+		int sem1_exam_num[3];
+		int sem1_result[3];
+		int sem2_exam_num[4];
+		int sem2_result[4];
 	} results_t;
 
 typedef struct {
@@ -21,34 +23,40 @@ typedef struct {
 	results_t results;
 }students_t; 
 
-students_t* read_names(int *n)
+students_t* read_full_names(int *n)
 {
     int i, j;
     students_t *stud;
-    char arr[Max_num_of_stud][30];
+    char arr[Max_num_of_stud][3][30];
     for (i = 0; i < Max_num_of_stud; i++) {
-		printf("Enter the name of the %d student:   ", i+1);
-        myfgets(arr[i], 30);
-        if (!(strcmp(arr[i],"end")) ) {
+		printf("Enter the name of the %d student:\n   ", i+1);
+        myfgets(arr[0][i], 30);
+		if (!(strcmp(arr[0][i],"End.")) ) {
             break;
         }
+		printf("The surname:\n   ");
+		myfgets(arr[1][i], 30);
+		printf("Patronymic:\n   ", i+1);
+		myfgets(arr[2][i], 30);
+		
     }
     *n = i;
     stud = (students_t *) malloc(*n * sizeof(students_t));
     for (i = 0; i < *n; i++) {
-        strncpy(stud[i].full_name.name, arr[i],30);
+        strncpy(stud[i].full_name.name, arr[0][i],30);
+		strncpy(stud[i].full_name.surname, arr[1][i],30);
+		strncpy(stud[i].full_name.patronymic, arr[2][i],30);
     }
     return stud;
 }
 
-
 int read_arguments(int argc, char **argv) {
 	int sem_numb;
 	if(argc > 1 && argc < 3) {
-		if(!(strcmp(argv[1], "-f") {
-			sem_num = 1;
+		if(!(strcmp(argv[2], "-f")) ) {
+			sem_numb = 1;
 		}
-		if(strcmp(argv[1], "-s") {
+		if(!(strcmp(argv[2], "-s")) ) {
 			sem_numb = 2;
 		}
 	}
@@ -68,7 +76,7 @@ int main(int argc, char **argv)
 	if(!(sem_numb=read_argument(argc, argv)) {
 		return 0;	
 	}
-    read_names(&n);
+    read_full_names(&n);
 	
     return 0;
 }
