@@ -61,6 +61,33 @@ int read_argument(int argc, char **argv) {
 	return sem_numb;
 }
 
+students_t* read_full_names(int *num_of_stud)
+{
+	int i, j;
+	students_t *stud;
+	char arr[Max_num_of_stud][3][30];
+	for (i = 0; i < Max_num_of_stud; i++) {
+		printf("Enter the name of the %d student:\n   ", i+1);
+		myfgets(arr[0][i], 30);
+		if (!(strcmp(arr[0][i],"end")) ) {
+			break;
+		}
+		printf("The surname:\n   ");
+		myfgets(arr[1][i], 30);
+		printf("Patronymic:\n   ", i+1);
+		myfgets(arr[2][i], 30);
+		
+    }
+    *num_of_stud = i;
+    stud = (students_t *) malloc(*num_of_stud * sizeof(students_t));
+    for (i = 0; i < *num_of_stud; i++) {
+		strncpy(stud[i].full_name.name, arr[0][i],30);
+		strncpy(stud[i].full_name.surname, arr[1][i],30);
+		strncpy(stud[i].full_name.patronymic, arr[2][i],30);
+    }
+    return stud;
+}
+
 int read_results(students_t * stud, int numb_of_stud, int sem_numb) {
 	int i, j, amount_of_exams, exam_numb_in_sem[][4]={{1, 2, 3}, {1, 2, 4, 5}};
 	if(sem_numb == 1) {
@@ -123,30 +150,5 @@ char *catalog_of_exams(int exam_numb) {
 	}
 }
 
-students_t* read_full_names(int *num_of_stud)
-{
-	int i, j;
-	students_t *stud;
-	char arr[Max_num_of_stud][3][30];
-	for (i = 0; i < Max_num_of_stud; i++) {
-		printf("Enter the name of the %d student:\n   ", i+1);
-		myfgets(arr[0][i], 30);
-		if (!(strcmp(arr[0][i],"end")) ) {
-			break;
-		}
-		printf("The surname:\n   ");
-		myfgets(arr[1][i], 30);
-		printf("Patronymic:\n   ", i+1);
-		myfgets(arr[2][i], 30);
-		
-    }
-    *num_of_stud = i;
-    stud = (students_t *) malloc(*num_of_stud * sizeof(students_t));
-    for (i = 0; i < *num_of_stud; i++) {
-		strncpy(stud[i].full_name.name, arr[0][i],30);
-		strncpy(stud[i].full_name.surname, arr[1][i],30);
-		strncpy(stud[i].full_name.patronymic, arr[2][i],30);
-    }
-    return stud;
-}
+
 
