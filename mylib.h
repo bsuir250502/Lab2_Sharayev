@@ -1,4 +1,4 @@
-ndef _MYLIB_H_
+#ifndef _MYLIB_H_
 #define _MYLIB_H_
 
 #include <stdio.h>
