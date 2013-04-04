@@ -22,14 +22,14 @@ typedef struct {
 }students_t; 
 
 int read_argument(int, char **);
-students_t* read_full_names(int);
+students_t* read_full_names(int *);
 int read_results(students_t *, int, int);
 char* catalog_of_exams(int);
 int print_information(students_t *, int, int);
 
 int main(int argc, char **argv)
 {
-    int i,numb_of_stud=Max_num_of_stud,sem_numb;
+    int numb_of_stud=Max_num_of_stud,sem_numb;
 	students_t *stud;
     if(print_manual(argc,argv)) {
 		return 0;
@@ -61,9 +61,9 @@ int read_argument(int argc, char **argv) {
 	return sem_numb;
 }
 
-students_t* read_full_names(int *num_of_stud)
+students_t *read_full_names(int *num_of_stud)
 {
-	int i, j;
+	int i;
 	students_t *stud;
 	char arr[Max_num_of_stud][3][30];
 	for (i = 0; i < Max_num_of_stud; i++) {
@@ -74,7 +74,7 @@ students_t* read_full_names(int *num_of_stud)
 		}
 		printf("The surname:\n   ");
 		myfgets(arr[1][i], 30);
-		printf("Patronymic:\n   ", i+1);
+		printf("Patronymic:\n   ");
 		myfgets(arr[2][i], 30);
 
     }
