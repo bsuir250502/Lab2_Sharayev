@@ -14,7 +14,7 @@ typedef struct {
 typedef union {
 	int sem1_result[3];
 	int sem2_result[4];
-	} results_t;
+} results_t;
 
 typedef struct {
 	full_name_t full_name;
@@ -29,19 +29,18 @@ int print_information(students_t *, int, int);
 
 int main(int argc, char **argv)
 {
-    int numb_of_stud=Max_num_of_stud,sem_numb;
+	int numb_of_stud=Max_num_of_stud,sem_numb;
 	students_t *stud;
-    if(print_manual(argc,argv)) {
+	if(print_manual(argc,argv)) {
 		return 0;
 	}
 	if(!(sem_numb=read_argument(argc, argv)) ) {
 		return 0;	
 	}
-	sem_numb=1;
-    stud = read_full_names(&numb_of_stud);
+	stud = read_full_names(&numb_of_stud);
 	read_results(stud,numb_of_stud,sem_numb);
 	print_information(stud,numb_of_stud,sem_numb);
-    return 0;
+	return 0;
 }
 
 int read_argument(int argc, char **argv) {
