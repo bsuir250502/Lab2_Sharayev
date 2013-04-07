@@ -19,6 +19,7 @@ typedef union {
 typedef struct {
 	full_name_t full_name;
 	results_t results;
+	int number_of_sem;
 }students_t; 
 
 int read_argument(int, char **);
