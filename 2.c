@@ -93,7 +93,7 @@ students_t *read_full_names(int *num_of_stud)
 }
 
 int read_results(students_t * stud, int numb_of_stud, int sem_numb) {
-	int i, j, amount_of_exams = sem_numb+2, exam_numb_in_sem[][4]={{1, 2, 3}, {1, 2, 4, 5}};
+	int i, j, amount_of_exams = sem_numb+2, exam_numb_in_sem[][5]={{1, 2, 3}, {1, 2, 4, 5},{1, 2, 3, 4, 5}};
 	printf("Specify the results of students:\n");
 	for(i=0; i < numb_of_stud; i++) {
 		printf("%d) %s %s\n",i+1,stud[i].full_name.name, stud[i].full_name.surname);
@@ -101,12 +101,18 @@ int read_results(students_t * stud, int numb_of_stud, int sem_numb) {
 		stud[i].number_of_sem=input_number_in_range(1,3);
 		for(j=0; j < amount_of_exams; j++) {
 			printf("  %s  ", catalog_of_exams(exam_numb_in_sem[sem_numb-1][j]));
-			if( stud[i].number_of_sem == sem_numb && sem_numb == 1) {
-				stud[i].results.sem1_result[j]=input_number_in_range(1,10);
+			switch (stud[i].number_of_sem) {
+				case 1: 
+					stud[i].results.sem1_result[j]=input_number_in_range(1,10); 
+					break;
+				case 2:
+					stud[i].results.sem2_result[j]=input_number_in_range(1,10);
+					break;
+				case 3: 
+					stud[i].results.sem3_result[j]=input_number_in_range(1,10);
+					break;
 			}
-			else {
-				stud[i].results.sem2_result[j]=input_number_in_range(1,10);
-			}
+			
 		}
 	}
 
@@ -120,11 +126,19 @@ int print_information(students_t * stud, int numb_of_stud, int sem_numb) {
 		printf("%d) %s %s\n",i+1,stud[i].full_name.name, stud[i].full_name.surname);
 		for(j=0; j < amount_of_exams; j++) {
 			printf("  %s  ", catalog_of_exams(exam_numb_in_sem[sem_numb-1][j]));
-			if(sem_numb == 1) {
-				printf("%d", stud[i].results.sem1_result[j]);
-			}
-			else {
-				printf("%d", stud[i].results.sem2_result[j]);
+			if(sem_numb == stud[i].number_of_sem) {
+				switch (stud[i].number_of_sem) {
+					case 1: 
+						printf("%d", stud[i].results.sem1_result[j]);
+						break;
+					case 2:
+						printf("%d", stud[i].results.sem2_result[j]);
+						break;
+					case 3: 
+						printf("%d", stud[i].results.sem3_result[j]);
+						break;
+				}
+
 			}
 		}
 		printf("\n");
