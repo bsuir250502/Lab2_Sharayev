@@ -23,7 +23,7 @@ typedef struct {
 	int number_of_sem;
 }students_t; 
 
-int read_argument(int, char **);
+char read_argument(int, char **);
 students_t* read_full_names(int *);
 int read_results(students_t *, int, int);
 char* catalog_of_exams(int);
@@ -33,11 +33,19 @@ int main(int argc, char **argv)
 {
 	int numb_of_stud=Max_num_of_stud,sem_numb;
 	students_t *stud;
-	if(print_manual(argc,argv)) {
-		return 0;
-	}
-	if(!(sem_numb=read_argument(argc, argv)) ) {
-		return 0;	
+	switch (read_argument(argc, argv)) {
+		case '1': 
+			sem_numb=1;
+			break;
+		case '2': 
+			sem_numb=2;
+			break;
+		case '3':
+			sem_numb=3;
+			break;
+		case 'h':
+			print_manual(argc,argv);
+			return 0;
 	}
 	stud = read_full_names(&numb_of_stud);
 	read_results(stud,numb_of_stud,sem_numb);
@@ -45,24 +53,27 @@ int main(int argc, char **argv)
 	return 0;
 }
 
-int read_argument(int argc, char **argv) {
-	int sem_numb;
+char read_argument(int argc, char **argv) {
+
 	if(argc == 2) {
 		if(!(strcmp(argv[1], "-s1")) ) {
-			sem_numb = 1;
+			return '1';
 		}
 		if(!(strcmp(argv[1], "-s2")) ) {
-			sem_numb = 2;
+			return '2';
 		}
 		if(!(strcmp(argv[1], "-s3")) ) {
-			sem_numb = 3;
+			return '3';
+		}
+		if(!(strcmp(argv[1], "-h")) ) {
+			return 'h';
 		}
 	}
 	else {
 		printf("You need to set one of three sems(first(-s1), second(-s2) or third (-s3))");
 		return 0;
 	}
-	return sem_numb;
+	return 0;
 }
 
 students_t *read_full_names(int *num_of_stud)
@@ -71,7 +82,7 @@ students_t *read_full_names(int *num_of_stud)
 	students_t *stud;
 	char arr[Max_num_of_stud][3][30];
 	for (i = 0; i < Max_num_of_stud; i++) {
-		printf("Enter the name of the %d student(\"end\" to stop input)):\n   ", i+1);
+		printf("Enter the name of the %d student:\n   ", i+1);
 		myfgets(arr[0][i], 30);
 		if (!(strcmp(arr[0][i],"end")) ) {
 			break;
