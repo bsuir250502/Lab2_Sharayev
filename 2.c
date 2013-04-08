@@ -71,7 +71,7 @@ students_t *read_full_names(int *num_of_stud)
 	students_t *stud;
 	char arr[Max_num_of_stud][3][30];
 	for (i = 0; i < Max_num_of_stud; i++) {
-		printf("Enter the name of the %d student:\n   ", i+1);
+		printf("Enter the name of the %d student(\"end\" to stop input)):\n   ", i+1);
 		myfgets(arr[0][i], 30);
 		if (!(strcmp(arr[0][i],"end")) ) {
 			break;
