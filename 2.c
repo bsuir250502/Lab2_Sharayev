@@ -20,7 +20,7 @@ typedef union {
 typedef struct {
 	full_name_t full_name;
 	results_t results;
-	int number_of_sem;
+	int sem_numb;
 }students_t; 
 
 char read_argument(int, char **);
@@ -47,12 +47,13 @@ int main(int argc, char **argv)
 			print_manual(argc,argv);
 			return 0;
 		default:
-			printf("You need to set one of three sems(first(-s1), second(-s2) or third (-s3))");
+			printf("You need to set one of three sems(first(-s1), second(-s2) or third (-s3)) or specyfy help(-h) to view manual");
 			return 0;
 	}
 	stud = read_full_names(&numb_of_stud);
 	read_results(stud,numb_of_stud,sem_numb);
 	print_information(stud,numb_of_stud,sem_numb);
+
 	return 0;
 }
 
@@ -82,7 +83,7 @@ students_t *read_full_names(int *num_of_stud)
 	students_t *stud;
 	char arr[Max_num_of_stud][3][30];
 	for (i = 0; i < Max_num_of_stud; i++) {
-		printf("Enter the name of the %d student:\n   ", i+1);
+		printf("Enter the name of the %d student(\"end\" to stop input):\n   ", i+1);
 		myfgets(arr[0][i], 30);
 		if (!(strcmp(arr[0][i],"end")) ) {
 			break;
@@ -100,6 +101,7 @@ students_t *read_full_names(int *num_of_stud)
 		strncpy(stud[i].full_name.surname, arr[1][i],30);
 		strncpy(stud[i].full_name.patronymic, arr[2][i],30);
     }
+
     return stud;
 }
 
@@ -109,10 +111,10 @@ int read_results(students_t * stud, int numb_of_stud, int sem_numb) {
 	for(i=0; i < numb_of_stud; i++) {
 		printf("%d) %s %s\n",i+1,stud[i].full_name.name, stud[i].full_name.surname);
 		printf("  Specify sem:  \n");
-		stud[i].number_of_sem=input_number_in_range(1,3);
-		for(j=0; j < amount_of_exams[stud[i].number_of_sem - 1]; j++) {
+		stud[i].sem_numb=input_number_in_range(1,3);
+		for(j=0; j < amount_of_exams[stud[i].sem_numb - 1]; j++) {
 			printf("  %s  ", catalog_of_exams(exam_numb_in_sem[sem_numb-1][j]));
-			switch (stud[i].number_of_sem) {
+			switch (stud[i].sem_numb) {
 				case 1: 
 					stud[i].results.sem1_result[j]=input_number_in_range(1,10); 
 					break;
@@ -135,10 +137,10 @@ int print_information(students_t * stud, int numb_of_stud, int sem_numb) {
 	printf("Results of students:\n");
 	for(i=0; i < numb_of_stud; i++) {
 		printf("%d) %s %s\n",i+1,stud[i].full_name.name, stud[i].full_name.surname);
-		for(j=0; j < amount_of_exams[stud[i].number_of_sem - 1]; j++) {
+		for(j=0; j < amount_of_exams[stud[i].sem_numb - 1]; j++) {
 			printf("  %s  ", catalog_of_exams(exam_numb_in_sem[sem_numb-1][j]));
-			if(sem_numb == stud[i].number_of_sem) {
-				switch (stud[i].number_of_sem) {
+			if(sem_numb == stud[i].sem_numb) {
+				switch (stud[i].sem_numb) {
 					case 1: 
 						printf("%d", stud[i].results.sem1_result[j]);
 						break;
