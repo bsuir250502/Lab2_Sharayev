@@ -44,7 +44,7 @@ int main(int argc, char **argv)
 			sem_numb=3;
 			break;
 		case 'h':
-			print_manual(argc,argv);
+			print_manual();
 			return 0;
 		default:
 			printf("You need to set one of three sems(first(-s1), second(-s2) or third (-s3)) or specyfy help(-h) to view manual");
