@@ -46,6 +46,9 @@ int main(int argc, char **argv)
 		case 'h':
 			print_manual(argc,argv);
 			return 0;
+		default:
+			printf("You need to set one of three sems(first(-s1), second(-s2) or third (-s3))");
+			return 0;
 	}
 	stud = read_full_names(&numb_of_stud);
 	read_results(stud,numb_of_stud,sem_numb);
@@ -69,11 +72,9 @@ char read_argument(int argc, char **argv) {
 			return 'h';
 		}
 	}
-	else {
 		printf("You need to set one of three sems(first(-s1), second(-s2) or third (-s3))");
-		return 0;
-	}
-	return 0;
+
+	return '0';
 }
 
 students_t *read_full_names(int *num_of_stud)
