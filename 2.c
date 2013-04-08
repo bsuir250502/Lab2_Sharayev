@@ -72,7 +72,6 @@ char read_argument(int argc, char **argv) {
 			return 'h';
 		}
 	}
-		printf("You need to set one of three sems(first(-s1), second(-s2) or third (-s3))");
 
 	return '0';
 }
