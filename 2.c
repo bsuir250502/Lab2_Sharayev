@@ -53,6 +53,7 @@ int main(int argc, char **argv)
 	stud = read_full_names(&numb_of_stud);
 	read_results(stud,numb_of_stud,sem_numb);
 	print_information(stud,numb_of_stud,sem_numb);
+	free(stud);
 
 	return 0;
 }
