@@ -133,7 +133,7 @@ int read_results(students_t * stud, int numb_of_stud, int sem_numb) {
 }
 
 int print_information(students_t * stud, int numb_of_stud, int sem_numb) {
-	int i, j, amount_of_exams[3]={3, 4, 5}, exam_numb_in_sem[][4]={{1, 2, 3}, {1, 2, 4, 5}};
+	int i, j, amount_of_exams[3]={3, 4, 5}, exam_numb_in_sem[][5]={{1, 2, 3}, {1, 2, 4, 5},{1, 2, 3, 4, 5}};
 	printf("Results of students:\n");
 	for(i=0; i < numb_of_stud; i++) {
 		printf("%d) %s %s\n",i+1,stud[i].full_name.name, stud[i].full_name.surname);
