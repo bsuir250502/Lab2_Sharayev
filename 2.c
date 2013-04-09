@@ -3,7 +3,7 @@
 #include <string.h>
 #include <malloc.h>
 #include "mylib.h"
-#define Max_num_of_stud 20
+#define MAX_NUM_OF_STUD 20
 
 typedef struct {
 	char name[10];
@@ -21,7 +21,7 @@ typedef struct {
 	full_name_t full_name;
 	results_t results;
 	int sem_numb;
-}students_t; 
+} students_t; 
 
 char read_argument(int, char **);
 students_t* read_full_names(int *);
@@ -31,7 +31,7 @@ int print_information(students_t *, int, int);
 
 int main(int argc, char **argv)
 {
-	int numb_of_stud=Max_num_of_stud,sem_numb;
+	int numb_of_stud=MAX_NUM_OF_STUD,sem_numb;
 	students_t *stud;
 	switch (read_argument(argc, argv)) {
 		case '1': 
@@ -78,12 +78,11 @@ char read_argument(int argc, char **argv) {
 	return '0';
 }
 
-students_t *read_full_names(int *num_of_stud)
-{
+students_t *read_full_names(int *num_of_stud) {
 	int i;
 	students_t *stud;
-	char arr[Max_num_of_stud][3][30];
-	for (i = 0; i < Max_num_of_stud; i++) {
+	char arr[MAX_NUM_OF_STUD][3][30];
+	for (i = 0; i < MAX_NUM_OF_STUD; i++) {
 		printf("Enter the name of the %d student(\"end\" to stop input):\n   ", i+1);
 		myfgets(arr[0][i], 30);
 		if (!(strcmp(arr[0][i],"end")) ) {
