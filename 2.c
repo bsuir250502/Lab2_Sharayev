@@ -136,10 +136,10 @@ int print_information(students_t * stud, int numb_of_stud, int sem_numb) {
 	int i, j, amount_of_exams[3]={3, 4, 5}, exam_numb_in_sem[][5]={{1, 2, 3}, {1, 2, 4, 5},{1, 2, 3, 4, 5}};
 	printf("Results of students:\n");
 	for(i=0; i < numb_of_stud; i++) {
-		printf("%d) %s %s\n",i+1,stud[i].full_name.name, stud[i].full_name.surname);
-		for(j=0; j < amount_of_exams[stud[i].sem_numb - 1]; j++) {
-			printf("  %s  ", catalog_of_exams(exam_numb_in_sem[sem_numb-1][j]));
-			if(sem_numb == stud[i].sem_numb) {
+		if(sem_numb == stud[i].sem_numb) {
+			printf("%d) %s %s\n",i+1,stud[i].full_name.name, stud[i].full_name.surname);
+			for(j=0; j < amount_of_exams[stud[i].sem_numb - 1]; j++) {
+				printf("  %s  ", catalog_of_exams(exam_numb_in_sem[sem_numb-1][j]));
 				switch (stud[i].sem_numb) {
 					case 1: 
 						printf("%d", stud[i].results.sem1_result[j]);
@@ -151,10 +151,10 @@ int print_information(students_t * stud, int numb_of_stud, int sem_numb) {
 						printf("%d", stud[i].results.sem3_result[j]);
 						break;
 				}
-
 			}
+			printf("\n");
 		}
-		printf("\n");
+
 	}
 
 	return 0;
