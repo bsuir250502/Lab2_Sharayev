@@ -12,9 +12,9 @@ typedef struct {
 } full_name_t;
 
 typedef union {
-    int sem1_result[3];
-    int sem2_result[4];
     int sem3_result[5];
+    int sem2_result[4];
+    int sem1_result[3];
 } results_t;
 
 typedef struct {
