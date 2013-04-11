@@ -28,6 +28,7 @@ students_t* read_full_names(int *);
 int read_results(students_t *, int, int);
 char* catalog_of_exams(int);
 int print_information(students_t *, int, int);
+int exam_num(int, int);
 
 int main(int argc, char **argv)
 {
