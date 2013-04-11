@@ -33,22 +33,17 @@ int main(int argc, char **argv)
 {
 	int numb_of_stud=MAX_NUM_OF_STUD,sem_numb;
 	students_t *stud;
-	switch (read_argument(argc, argv)) {
-		case '1': 
-			sem_numb=1;
-			break;
-		case '2': 
-			sem_numb=2;
-			break;
-		case '3':
-			sem_numb=3;
-			break;
+	char arg;
+	arg = read_argument(argc, argv);
+	switch (arg) {
 		case 'h':
 			print_manual();
 			return 0;
+			case '0':
+				printf("You need to set one of three sems(first(-s1), second(-s2) or third (-s3)) or specyfy help(-h) to view manual");
+				return 0;
 		default:
-			printf("You need to set one of three sems(first(-s1), second(-s2) or third (-s3)) or specyfy help(-h) to view manual");
-			return 0;
+			sem_numb = arg - '0';
 	}
 	stud = read_full_names(&numb_of_stud);
 	read_results(stud,numb_of_stud,sem_numb);
@@ -125,7 +120,7 @@ int read_results(students_t * stud, int numb_of_stud, int sem_numb) {
 					stud[i].results.sem3_result[j]=input_number_in_range(1,10);
 					break;
 			}
-			
+
 		}
 	}
 
@@ -162,8 +157,9 @@ int print_information(students_t * stud, int numb_of_stud, int sem_numb) {
 
 char *catalog_of_exams(int exam_number) {
     static char exam[][12]={"Math", "Programming", "AiLOVT", "Physics", "English"};
-    if (exam_number >= 1 && exam_number <= 5)
+    if (exam_number >= 1 && exam_number <= 5) {
         return exam[exam_number - 1];
-    else
-        return "";
+	}
+
+        return "0";
 }
