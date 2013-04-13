@@ -5,6 +5,8 @@
 #include "mylib.h"
 #define MAX_NUM_OF_STUD 20
 
+const int AMOUNT_OF_EXAMS[3] = {3, 4, 5};
+
 typedef struct {
     char name[10];
     char surname[10];
@@ -108,22 +110,15 @@ students_t *read_full_names(int *num_of_stud)
 
 int read_results(students_t * stud, int numb_of_stud)
 {
-    int i, j, amount_of_exams;
+    int i, j;
     printf("Specify the results of students:\n");
     for (i = 0; i < numb_of_stud; i++) {
         printf("%d) %s %s\n", i + 1, stud[i].full_name.name,
                stud[i].full_name.surname);
         printf("  Specify sem:  \n");
         stud[i].sem_numb = input_number_in_range(1, 3);
-        switch (stud[i].sem_numb) {
-        case 1:
-            amount_of_exams = SIZE(stud[i].results.sem1_result);
-        case 2:
-            amount_of_exams = SIZE(stud[i].results.sem2_result);
-        case 3:
-            amount_of_exams = SIZE(stud[i].results.sem3_result);
-        }
-        for (j = 0; j < amount_of_exams; j++) {
+       
+        for (j = 0; j < AMOUNT_OF_EXAMS[ stud[i].sem_numb - 1]; j++) {
             printf("  %s  ",
                    catalog_of_exams(exam_num(stud[i].sem_numb - 1, j)));
             switch (stud[i].sem_numb) {
@@ -149,21 +144,14 @@ int read_results(students_t * stud, int numb_of_stud)
 
 int print_information(students_t * stud, int numb_of_stud, int sem_numb)
 {
-    int i, j, amount_of_exams;
+    int i, j;
     printf("Results of students:\n");
     for (i = 0; i < numb_of_stud; i++) {
         if (sem_numb == stud[i].sem_numb) {
             printf("%d) %s %s\n", i + 1, stud[i].full_name.name,
                    stud[i].full_name.surname);
-            switch (stud[i].sem_numb) {
-            case 1:
-                amount_of_exams = SIZE(stud[i].results.sem1_result);
-            case 2:
-                amount_of_exams = SIZE(stud[i].results.sem2_result);
-            case 3:
-                amount_of_exams = SIZE(stud[i].results.sem3_result);
-            }
-            for (j = 0; j < amount_of_exams; j++) {
+           
+            for (j = 0; j < AMOUNT_OF_EXAMS[ stud[i].sem_numb - 1]; j++) {
                 printf("  %s  ",
                        catalog_of_exams(exam_num
                                         (stud[i].sem_numb - 1, j)));
