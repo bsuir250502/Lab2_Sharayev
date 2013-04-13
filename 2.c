@@ -185,7 +185,7 @@ char *catalog_of_exams(int exam_number)
 
 int exam_num(int sem, int exam)
 {
-    int schedule_of_exams[][5] =
+    static int schedule_of_exams[][5] =
         { {1, 2, 3}, {1, 2, 4, 5}, {1, 2, 3, 4, 5} };
     return schedule_of_exams[sem][exam];
 }
