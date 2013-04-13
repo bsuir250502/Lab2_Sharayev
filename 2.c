@@ -59,7 +59,6 @@ int main(int argc, char **argv)
 
 char read_argument(int argc, char **argv)
 {
-
     if (argc == 2) {
         if (!(strcmp(argv[1], "-s1"))) {
             return '1';
@@ -95,7 +94,6 @@ students_t *read_full_names(int *num_of_stud)
         myfgets(arr[1][i], 30);
         printf("Patronymic:\n   ");
         myfgets(arr[2][i], 30);
-
     }
     *num_of_stud = i;
     stud = (students_t *) malloc(*num_of_stud * sizeof(students_t));
@@ -169,7 +167,6 @@ int print_information(students_t * stud, int numb_of_stud, int sem_numb)
             }
             printf("\n");
         }
-
     }
 
     return 0;
@@ -191,5 +188,4 @@ int exam_num(int sem, int exam)
     int schedule_of_exams[][5] =
         { {1, 2, 3}, {1, 2, 4, 5}, {1, 2, 3, 4, 5} };
     return schedule_of_exams[sem][exam];
-
 }
